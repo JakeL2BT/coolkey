@@ -117,7 +117,7 @@ public class CardEdge extends Applet
 {
     private static final byte ZEROB = 0;
     private static final byte MAX_NUM_KEYS = 24;
-    private static final byte MAX_NUM_PINS = 8;
+    private static final byte MAX_NUM_PINS = 8;  //  Should consider reducing maximum User accounts to 1. JakeL2BT
     
     private static final byte VERSION_PROTOCOL_MAJOR = 1;
     private static final byte VERSION_PROTOCOL_MINOR = 1;
@@ -177,7 +177,7 @@ public class CardEdge extends Applet
     private static final short NO_ONE_ACL     = (short)0;
     
     private static final byte pinPolicies     = 7;
-    private static final byte pinMinSize      = 4;
+    private static final byte pinMinSize      = 4;  //  Should consider increasing to minimum of 6. JakeL2BT
     private static final byte pinMaxSize      = 16;
     
     private static final byte MAX_KEY_TRIES   = 5;
@@ -237,12 +237,12 @@ public class CardEdge extends Applet
     private static final byte INS_SEC_EXT_AUTH              = (byte)0x82;
     private static final byte INS_SEC_SET_LIFECYCLE         = (byte)0xF0;
     private static final byte INS_SEC_SET_ISSUER_INFO       = (byte)0xF4;
-    private static final byte INS_SEC_SET_BUILTIN_ACL       = (byte)0xF8;
+    private static final byte INS_SEC_SET_BUILTIN_ACL       = (byte)0xF8;  //  This command is not available in the CoolKey host header file. Should consider fixing or setting enable_ACL_change to disabled.  JakeL2BT 
     private static final byte INS_SEC_SET_PIN               = (byte)0x04;
-    private static final byte INS_SEC_READ_IOBUF            = (byte)0x08;
+    private static final byte INS_SEC_READ_IOBUF            = (byte)0x08;  //  This command should be moved up to DEPRECATED and commented out in the code. JakeL2BT
     private static final byte INS_SEC_IMPORT_KEY_ENCRYPTED  = (byte)0x0A;
     private static final byte INS_SEC_START_ENROLLMENT      = (byte)0x0C;
-    private static final byte INS_SEC_CLEAR_KEY_SLOTS       = (byte)0x55;
+    private static final byte INS_SEC_CLEAR_KEY_SLOTS       = (byte)0x55;  //  Currently not functioning.  JakeL2BT
 
 
     // * There have been memory problems on the card
@@ -346,7 +346,7 @@ public class CardEdge extends Applet
     private static final byte ALG_DSA     = 2;
     private static final byte ALG_DES     = 3;
     private static final byte ALG_3DES    = 4;
-    private static final byte ALG_3DES3   = 5;
+    private static final byte ALG_3DES3   = 5;  //  Should consider adding support for AES and ECC. JakeL2BT
     
     private static final byte KEY_RSA_PUBLIC      = 1;
     private static final byte KEY_RSA_PRIVATE     = 2;
@@ -408,8 +408,10 @@ public class CardEdge extends Applet
 
     private static final short OFFSET_IMP_KEY_ENC_WRAP_KEY      =  5;
 
-    private static final short MAX_RSA_MOD_BITS  = 2048;
-    private static final short MAX_RSA_MOD_BYTES = 256;
+    //      private static final short MAX_RSA_MOD_BITS  = 2048;  //  Should consider increasing to 4096. JakeL2BT
+    //      private static final short MAX_RSA_MOD_BYTES = 256;   //  Should consider increasing to 512. JakeL2BT
+    private static final short MAX_RSA_MOD_BITS  = 4096;  //  Should consider increasing to 4096. JakeL2BT
+    private static final short MAX_RSA_MOD_BYTES = 512;   //  Should consider increasing to 512. JakeL2BT
 
     // 554 = 2 bytes for explicit length, 
     //     512 bytes for data
@@ -457,7 +459,7 @@ public class CardEdge extends Applet
     private short         create_object_ACL;
     private short         create_key_ACL;
     private short         create_pin_ACL;
-    private byte          enable_ACL_change;
+    private byte          enable_ACL_change;  //  This command is not available in the CoolKey host header file. Should consider fixing or setting enable_ACL_change to disabled.  JakeL2BT 
     private MessageDigest shaDigest;
     private boolean       transientInit;
     private RandomData    randomGenerator;
